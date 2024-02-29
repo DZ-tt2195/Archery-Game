@@ -6,7 +6,9 @@ namespace Archery
 {
     public class Player : MonoBehaviour
     {
-        bool availableArrow = true;
+        public bool availableArrow = false;
+        public int playerNumber;
+        public int score;
         [SerializeField] Arrow arrowPrefab;
         [SerializeField] KeyCode key;
 
@@ -16,6 +18,7 @@ namespace Archery
             {
                 Arrow arrow = Instantiate(arrowPrefab);
                 arrow.transform.position = new Vector3(0, 0, -5);
+                arrow.player = this;
                 availableArrow = false;
             }
         }
