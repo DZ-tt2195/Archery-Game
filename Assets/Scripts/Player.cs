@@ -8,7 +8,7 @@ namespace Archery
     {
         public bool availableArrow = false;
         public int playerNumber;
-        public int score;
+        public List<int> scoreTally = new();
         [SerializeField] Arrow arrowPrefab;
         [SerializeField] KeyCode key;
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Archery
 {
@@ -12,6 +13,7 @@ namespace Archery
         [SerializeField] List<Bullseye> possibleBullseyes = new();
         [SerializeField] TMP_Text roundNumberText;
         [SerializeField] GameObject reticle;
+        [SerializeField] Button backToTitleScreen;
 
         private int _round;
         int Round {get {return _round;} set { _round = value; roundNumberText.text = $"ROUND {value}";}}
@@ -20,14 +22,13 @@ namespace Archery
 
         void Start()
         {
-            Application.targetFrameRate = 60;
-
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < StoreInfo.instance.numPlayers; i++)
             {
                 Player nextPlayer = Instantiate(playerPrefab);
                 nextPlayer.playerNumber = i;
                 listOfPlayers.Add(nextPlayer);
             }
+            backToTitleScreen.gameObject.SetActive(false);
             StartCoroutine(NewRound());
         }
 
@@ -36,7 +37,10 @@ namespace Archery
             Round++;
             reticle.SetActive(true);
             foreach (Player player in listOfPlayers)
+            {
                 player.availableArrow = true;
+                player.scoreTally.Add(0);
+            }
 
             Bullseye nextBullseye = Instantiate(possibleBullseyes[Random.Range(0, possibleBullseyes.Count)]);
             yield return new WaitForSeconds(Random.Range(0f, 3f));
@@ -51,15 +55,37 @@ namespace Archery
             foreach (Arrow arrow in listOfArrows)
                 arrow.CalculateScore();
 
-            Countdown = 4;
-            while (Countdown > 0)
+            if (StoreInfo.instance.selectedMode == StoreInfo.GameMode.HighScore &&
+                Round == 10)
             {
-                Countdown -= Time.deltaTime;
-                yield return null;
+                roundNumberText.text = "The end.";
+                GameOver();
             }
+            else if (StoreInfo.instance.selectedMode == StoreInfo.GameMode.Endless &&
+                listOfArrows.Length < listOfPlayers.Count)
+            {
+                roundNumberText.text = "You missed an arrow.";
+                GameOver();
+            }
+            else
+            {
+                Countdown = 4;
+                while (Countdown > 0)
+                {
+                    Countdown -= Time.deltaTime;
+                    yield return null;
+                }
 
-            Destroy(nextBullseye.gameObject);
-            StartCoroutine(NewRound());
+                Destroy(nextBullseye.gameObject);
+                StartCoroutine(NewRound());
+            }
+        }
+
+        void GameOver()
+        {
+            backToTitleScreen.onClick.AddListener(() => StoreInfo.instance.NextScene(0));
+            backToTitleScreen.gameObject.SetActive(true);
         }
     }
+
 }

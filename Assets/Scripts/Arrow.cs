@@ -45,9 +45,9 @@ namespace Archery
         {
             Vector3 currentPosition = transform.localPosition;
             currentPosition.z = 0;
-            int score = 8 - (int)(Vector3.Distance(currentPosition, Vector3.zero) / 0.65f);
+            int score = 8 - (int)(Vector3.Distance(currentPosition, Vector3.zero) / 0.6f);
             Debug.Log(score);
-            player.score += score;
+            player.scoreTally[^1] += score;
         }
 
         private void OnTriggerEnter(Collider other)
