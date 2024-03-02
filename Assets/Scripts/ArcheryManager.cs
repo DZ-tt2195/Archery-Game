@@ -14,6 +14,8 @@ namespace Archery
         [SerializeField] TMP_Text roundNumberText;
         [SerializeField] GameObject reticle;
         [SerializeField] Button backToTitleScreen;
+        [SerializeField] TMP_Text player1Text;
+        [SerializeField] TMP_Text player2Text;
 
         private int _round;
         int Round {get {return _round;} set { _round = value; roundNumberText.text = $"ROUND {value}";}}
@@ -26,8 +28,12 @@ namespace Archery
             {
                 Player nextPlayer = Instantiate(playerPrefab);
                 nextPlayer.playerNumber = i;
+                nextPlayer.key = (i == 0) ? KeyCode.LeftShift : KeyCode.RightShift;
                 listOfPlayers.Add(nextPlayer);
             }
+            if (listOfPlayers.Count == 1)
+                player2Text.gameObject.SetActive(false);
+
             backToTitleScreen.gameObject.SetActive(false);
             StartCoroutine(NewRound());
         }
@@ -43,7 +49,7 @@ namespace Archery
             }
 
             Bullseye nextBullseye = Instantiate(possibleBullseyes[Random.Range(0, possibleBullseyes.Count)]);
-            yield return new WaitForSeconds(Random.Range(0f, 3f));
+            yield return new WaitForSeconds(Random.Range(0f, 2f));
             yield return nextBullseye.Travelling();
 
             reticle.SetActive(false);
@@ -69,7 +75,7 @@ namespace Archery
             }
             else
             {
-                Countdown = 4;
+                Countdown = 3;
                 while (Countdown > 0)
                 {
                     Countdown -= Time.deltaTime;

@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Archery
 {
     public class Arrow : MonoBehaviour
     {
         bool moving = true;
-        [HideInInspector] public Player player;
+        public Player player;
         [SerializeField] float bulletSpeed;
 
         [SerializeField] Material bluePlayer;
         [SerializeField] Material redPlayer;
+        [SerializeField] PointsVisual textVisualPrefab;
         MeshRenderer meshRenderer;
 
         private void Awake()
@@ -46,8 +48,10 @@ namespace Archery
             Vector3 currentPosition = transform.localPosition;
             currentPosition.z = 0;
             int score = 8 - (int)(Vector3.Distance(currentPosition, Vector3.zero) / 0.6f);
-            Debug.Log(score);
+
             player.scoreTally[^1] += score;
+            PointsVisual newVisual = Instantiate(textVisualPrefab);
+            newVisual.Setup($"+{score}", meshRenderer.material.color, this.transform.position);
         }
 
         private void OnTriggerEnter(Collider other)

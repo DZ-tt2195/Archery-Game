@@ -10,7 +10,7 @@ namespace Archery
         public int playerNumber;
         public List<int> scoreTally = new();
         [SerializeField] Arrow arrowPrefab;
-        [SerializeField] KeyCode key;
+        public KeyCode key;
 
         private void Update()
         {
@@ -18,7 +18,7 @@ namespace Archery
             {
                 Arrow arrow = Instantiate(arrowPrefab);
                 arrow.transform.position = new Vector3(0, 0, -5);
-                arrow.player = this;
+                arrow.AssignPlayer(this);
                 availableArrow = false;
             }
         }

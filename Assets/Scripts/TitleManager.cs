@@ -10,6 +10,7 @@ namespace Archery
     {
         [SerializeField] Button highScoreMode;
         [SerializeField] Button endlessMode;
+        [SerializeField] Slider playerSlider;
 
         private void Start()
         {
@@ -21,6 +22,7 @@ namespace Archery
         void PlayGame(StoreInfo.GameMode gamemode)
         {
             StoreInfo.instance.selectedMode = gamemode;
+            StoreInfo.instance.numPlayers = (int)playerSlider.value;
             StoreInfo.instance.NextScene(1);
         }
     }

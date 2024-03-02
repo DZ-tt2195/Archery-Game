@@ -152,3 +152,4 @@ MonoBehaviour:
   bulletSpeed: 20
   bluePlayer: {fileID: 2100000, guid: 00a770aa74e2e458883fb3d1407d3a26, type: 2}
   redPlayer: {fileID: 2100000, guid: c9ac2b72b8a6a429094df84537d4bc08, type: 2}
+  textVisualPrefab: {fileID: 5700913299117066173, guid: d817be641f2464bdaa47d0a4e0b6d381, type: 3}
