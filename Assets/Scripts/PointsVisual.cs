@@ -39,7 +39,7 @@ namespace Archery
 
             while (waitTime > 0)
             {
-                transform.localScale = Vector3.Lerp(maxSize, Vector3.zero, elapsedTime / waitTime);
+                transform.localScale = Vector3.Lerp(maxSize, Vector3.zero, 1-waitTime);
                 waitTime -= Time.deltaTime;
                 transform.SetAsFirstSibling();
                 yield return null;

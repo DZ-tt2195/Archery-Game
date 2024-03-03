@@ -16,6 +16,9 @@ namespace Archery
         [SerializeField] Button backToTitleScreen;
         [SerializeField] TMP_Text player1Text;
         [SerializeField] TMP_Text player2Text;
+        [SerializeField] GameObject scoreboardObject;
+        [SerializeField] TMP_Text scoreTextPrefab;
+        [SerializeField] RectTransform scoreboardCollection;
 
         private int _round;
         int Round {get {return _round;} set { _round = value; roundNumberText.text = $"ROUND {value}";}}
@@ -35,6 +38,7 @@ namespace Archery
                 player2Text.gameObject.SetActive(false);
 
             backToTitleScreen.gameObject.SetActive(false);
+            scoreboardObject.SetActive(false);
             StartCoroutine(NewRound());
         }
 
@@ -75,7 +79,7 @@ namespace Archery
             }
             else
             {
-                Countdown = 3;
+                Countdown = 2.5f;
                 while (Countdown > 0)
                 {
                     Countdown -= Time.deltaTime;
@@ -91,6 +95,41 @@ namespace Archery
         {
             backToTitleScreen.onClick.AddListener(() => StoreInfo.instance.NextScene(0));
             backToTitleScreen.gameObject.SetActive(true);
+
+            scoreboardObject.SetActive(true);
+            TMP_Text sideText = GameObject.Find("Player Text").GetComponent<TMP_Text>();
+            sideText.text = $"Player";
+            for (int i = 0; i < listOfPlayers.Count; i++)
+                sideText.text += $"\n\n{i + 1}";
+
+            for (int i = 0; i<Round; i++)
+            {
+                string textContent = $"R{i + 1}";
+                foreach (Player player in listOfPlayers)
+                    textContent += $"\n\n{player.scoreTally[i]}";
+                AddText(textContent);
+            }
+
+            string totalScores = "Total";
+            foreach (Player player in listOfPlayers)
+            {
+                int playerScore = 0;
+                foreach (int tally in player.scoreTally)
+                    playerScore += tally;
+                totalScores += $"\n\n{playerScore}";
+            }
+            AddText(totalScores);
+        }
+
+        void AddText(string textContent)
+        {
+            TMP_Text nextText = Instantiate(scoreTextPrefab, scoreboardCollection);
+            nextText.text = textContent;
+
+            if (scoreboardCollection.childCount >= 11)
+            {
+                scoreboardCollection.sizeDelta = new Vector2(scoreboardCollection.sizeDelta.x + 150, scoreboardCollection.sizeDelta.y);
+            }
         }
     }
 
