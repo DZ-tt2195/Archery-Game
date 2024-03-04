@@ -1,44 +1,51 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class Bullseye : MonoBehaviour
+namespace Archery
 {
-    [SerializeField] List<TravelGuide> travelPoints;
-
-    [Serializable]
-    public struct TravelGuide
+    public class Bullseye : MonoBehaviour
     {
-        public Vector3 position;
-        public float time;
-    }
+        public TravelGuide tg;
+        [SerializeField] GameObject obstaclePrefab;
 
-    public IEnumerator Travelling()
-    {
-        foreach (TravelGuide tg in travelPoints)
+        private void Start()
         {
-            yield return MoveBullseye(tg.position, tg.time*UnityEngine.Random.Range(0.75f, 1.25f));
-        }
-    }
-
-    public IEnumerator Finished()
-    {
-        yield return MoveBullseye(Vector3.zero, 0.25f);
-    }
-
-    IEnumerator MoveBullseye(Vector3 newPosition, float waitTime)
-    {
-        float elapsedTime = 0;
-        Vector3 originalPos = transform.localPosition;
-
-        while (elapsedTime < waitTime)
-        {
-            transform.localPosition = Vector3.Lerp(originalPos, newPosition, elapsedTime / waitTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            int randomNumber = Random.Range(0, 10);
+            for (int i = 0; i<randomNumber; i++)
+            {
+                GameObject newObstacle = Instantiate(obstaclePrefab, this.transform);
+                float randomX = Random.Range(1f, 4f) * (Random.Range(0, 2) * 2 - 1);
+                float randomY = Random.Range(1f, 4f) * (Random.Range(0, 2) * 2 - 1);
+                newObstacle.transform.localPosition = new Vector3(randomX, randomY, -1f);
+            }
         }
 
-        transform.localPosition = newPosition;
+        public IEnumerator Travelling()
+        {
+            for (int i = 0; i < tg.position.Count; i++)
+            {
+                yield return MoveBullseye(tg.position[i], tg.time[i] * Random.Range(0.75f, 1.25f));
+            }
+        }
+
+        public IEnumerator Finished()
+        {
+            yield return MoveBullseye(Vector3.zero, 0.25f);
+        }
+
+        IEnumerator MoveBullseye(Vector3 newPosition, float waitTime)
+        {
+            float elapsedTime = 0;
+            Vector3 originalPos = transform.localPosition;
+
+            while (elapsedTime < waitTime)
+            {
+                transform.localPosition = Vector3.Lerp(originalPos, newPosition, elapsedTime / waitTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localPosition = newPosition;
+        }
     }
 }

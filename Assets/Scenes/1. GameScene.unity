@@ -2061,9 +2061,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5639bca0eaa74bea81a718c263b6341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listOfBullseyeVariants:
+  - position:
+    - {x: 20, y: 0, z: 0}
+    time:
+    - 4
+  - position:
+    - {x: -5, y: 0, z: 0}
+    - {x: 0, y: 5, z: 0}
+    - {x: 0, y: -10, z: 0}
+    time:
+    - 2
+    - 1
+    - 2
   playerPrefab: {fileID: 369628946037225559, guid: 8b2da99757ba64193a2ec8a8572cbff7, type: 3}
-  possibleBullseyes:
-  - {fileID: 687394614207119805, guid: 3e1e2464f44124746af6b89d13109912, type: 3}
+  bullseyePrefab: {fileID: 8896732698465037539, guid: 6a0f6e03784704c3f971fa56df2ba1e9, type: 3}
   roundNumberText: {fileID: 1952825881}
   reticle: {fileID: 1873315380}
   backToTitleScreen: {fileID: 1356358682}

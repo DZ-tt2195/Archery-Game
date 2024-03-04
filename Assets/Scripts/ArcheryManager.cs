@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 namespace Archery
 {
+    [Serializable]
+    public struct TravelGuide
+    {
+        public List<Vector3> position;
+        public List<float> time;
+    }
+
     public class ArcheryManager : MonoBehaviour
     {
         List<Player> listOfPlayers = new();
+        [SerializeField] List<TravelGuide> listOfBullseyeVariants = new();
         [SerializeField] Player playerPrefab;
-        [SerializeField] List<Bullseye> possibleBullseyes = new();
+        [SerializeField] Bullseye bullseyePrefab;
         [SerializeField] TMP_Text roundNumberText;
         [SerializeField] GameObject reticle;
         [SerializeField] Button backToTitleScreen;
@@ -52,8 +61,9 @@ namespace Archery
                 player.scoreTally.Add(0);
             }
 
-            Bullseye nextBullseye = Instantiate(possibleBullseyes[Random.Range(0, possibleBullseyes.Count)]);
-            yield return new WaitForSeconds(Random.Range(0f, 2f));
+            Bullseye nextBullseye = Instantiate(bullseyePrefab);
+            nextBullseye.tg = listOfBullseyeVariants[UnityEngine.Random.Range(0, listOfBullseyeVariants.Count)];
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 2f));
             yield return nextBullseye.Travelling();
 
             reticle.SetActive(false);
