@@ -14,8 +14,8 @@ namespace Archery
             for (int i = 0; i<randomNumber; i++)
             {
                 GameObject newObstacle = Instantiate(obstaclePrefab, this.transform);
-                float randomX = Random.Range(1f, 4f) * (Random.Range(0, 2) * 2 - 1);
-                float randomY = Random.Range(1f, 4f) * (Random.Range(0, 2) * 2 - 1);
+                float randomX = Random.Range(1f, 3.5f) * (Random.Range(0, 2) * 2 - 1);
+                float randomY = Random.Range(1f, 3.5f) * (Random.Range(0, 2) * 2 - 1);
                 newObstacle.transform.localPosition = new Vector3(randomX, randomY, -1f);
             }
         }
