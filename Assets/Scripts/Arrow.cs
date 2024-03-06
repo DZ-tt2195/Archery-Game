@@ -35,9 +35,7 @@ namespace Archery
         private void Update()
         {
             if (moving)
-            {
                 this.transform.Translate(bulletSpeed * Time.deltaTime * Vector3.up);
-            }
         }
 
         public void CalculateScore()
@@ -61,7 +59,6 @@ namespace Archery
             }
             else if (other.CompareTag("Obstacle"))
             {
-                Debug.Log("hit obstacle");
                 Destroy(this.gameObject);
             }
         }

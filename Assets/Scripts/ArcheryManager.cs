@@ -62,7 +62,10 @@ namespace Archery
             }
 
             Bullseye nextBullseye = Instantiate(bullseyePrefab);
-            nextBullseye.tg = listOfBullseyeVariants[UnityEngine.Random.Range(0, listOfBullseyeVariants.Count)];
+            int randomNumber = UnityEngine.Random.Range(0, listOfBullseyeVariants.Count);
+            nextBullseye.tg = listOfBullseyeVariants[randomNumber];
+            Debug.Log(randomNumber);
+
             yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 2f));
             yield return nextBullseye.Travelling();
 

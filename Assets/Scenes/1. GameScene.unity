@@ -2065,7 +2065,7 @@ MonoBehaviour:
   - position:
     - {x: 20, y: 0, z: 0}
     time:
-    - 4
+    - 3.5
   - position:
     - {x: -5, y: 0, z: 0}
     - {x: 0, y: 10, z: 0}
@@ -2073,7 +2073,7 @@ MonoBehaviour:
     time:
     - 1
     - 1
-    - 2
+    - 1.5
   - position:
     - {x: -5, y: 0, z: 0}
     - {x: 15, y: 0, z: 0}
@@ -2094,6 +2094,26 @@ MonoBehaviour:
     - 0
     - 2
     - 2
+  - position:
+    - {x: -17, y: 15, z: 0}
+    - {x: -12.5, y: -15, z: 0}
+    - {x: -7.5, y: 15, z: 0}
+    - {x: -2.5, y: -15, z: 0}
+    - {x: 2.5, y: 15, z: 0}
+    time:
+    - 0
+    - 1.5
+    - 1.5
+    - 1.5
+    - 1.5
+  - position:
+    - {x: 15, y: 0, z: 0}
+    - {x: -15, y: 0, z: 0}
+    - {x: 15, y: 0, z: 0}
+    time:
+    - 0.75
+    - 0.75
+    - 0.75
   playerPrefab: {fileID: 369628946037225559, guid: 8b2da99757ba64193a2ec8a8572cbff7, type: 3}
   bullseyePrefab: {fileID: 8896732698465037539, guid: 6a0f6e03784704c3f971fa56df2ba1e9, type: 3}
   roundNumberText: {fileID: 1952825881}
