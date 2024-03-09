@@ -10,7 +10,7 @@ namespace Archery
         public enum GameMode { HighScore, Endless };
         public GameMode selectedMode;
 
-        private void Awake()
+        private void Awake() //this remembers the game's settings chosen on the title screen
         {
             if (instance == null)
             {
@@ -23,7 +23,7 @@ namespace Archery
             }
         }
 
-        public void NextScene(int sceneNumber)
+        public static void NextScene(int sceneNumber)
         {
             SceneManager.LoadScene(sceneNumber);
         }

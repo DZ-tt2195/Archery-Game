@@ -20,7 +20,7 @@ namespace Archery
         {
             StoreInfo.instance.selectedMode = gamemode;
             StoreInfo.instance.numPlayers = (int)playerSlider.value;
-            StoreInfo.instance.NextScene(1);
+            StoreInfo.NextScene(1);
         }
     }
 }

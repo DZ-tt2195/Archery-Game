@@ -13,7 +13,7 @@ namespace Archery
 
         private void Update()
         {
-            if (availableArrow && Input.GetKeyDown(key))
+            if (availableArrow && Input.GetKeyDown(key)) //if this has an arrow, fire it
             {
                 Arrow arrow = Instantiate(arrowPrefab);
                 arrow.transform.position = new Vector3(0, 0, -5);
