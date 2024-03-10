@@ -11,12 +11,12 @@ namespace Archery
         private void Start()
         {
             //generate a random number of obstacle around the bullseye
-            int randomNumber = Random.Range(10, 15);
+            int randomNumber = Random.Range(5, 10);
             for (int i = 0; i<randomNumber; i++)
             {
                 GameObject newObstacle = Instantiate(obstaclePrefab, this.transform);
-                float randomX = Random.Range(0f, 3.5f) * (Random.Range(0, 2) * 2 - 1);
-                float randomY = Random.Range(0f, 3.5f) * (Random.Range(0, 2) * 2 - 1);
+                float randomX = Random.Range(-3.5f, 3.5f);
+                float randomY = Random.Range(-3.5f, 3.5f);
                 newObstacle.transform.localPosition = new Vector3(randomX, randomY, -1);
             }
         }
