@@ -19,7 +19,6 @@ namespace Archery
         /// </summary>
         /// <param name="text">what the text says</param>
         /// <param name="color">color of the text</param>
-        /// <param name="position">position to spawn this</param>
         public void Setup(string text, Color color)
         {
             this.transform.localEulerAngles = new Vector3(-90, 0, 0);

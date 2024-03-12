@@ -54,7 +54,7 @@ namespace Archery
         }
 
         /// <summary>
-        /// calculate score based on distacne from the center of the bullseye
+        /// calculate score based on distance from the center of the bullseye
         /// </summary>
         void CalculateScore()
         {
